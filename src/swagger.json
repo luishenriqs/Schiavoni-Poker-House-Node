@@ -1,0 +1,119 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Schiavoni Documentation",
+        "description": "This is an api for a Schiavoni Poker House App",
+        "version": "1.0.0",
+        "contact": {
+            "email": "lh.p@hotmail.com"
+        }
+    },
+    "paths": {
+        "/users": {
+            "post": {
+                "tags": ["Users"],
+                "summary": "Create user",
+                "description": "Insert a new user into the system",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string"
+                                    },
+                                    "user_name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "is_admin": {
+                                        "type": "boolean"
+                                    },
+                                    "is_active": {
+                                        "type": "boolean"
+                                    },
+                                    "created_at": {
+                                        "type": "string"
+                                    },
+                                    "updated_at": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "id":"319846198719876519874651984",
+                                    "user_name":"Jonh Doe",
+                                    "email":"jonhdoe@example.com",
+                                    "password":"JD2518463",
+                                    "is_admin":true,
+                                    "is_active": true,
+                                    "created_at":"2017-10-15 16:10",
+                                    "updated_at": "2021-06-29 02:53"
+                                }
+                            }
+                        }
+                    }
+                }, 
+                "responses":{
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Authenticate error"
+                    },
+                    "501": {
+                        "description": "Internal server errror"
+                    }
+                }
+            },
+            "get": {
+                "tags": ["Users"],
+                "summary": "List all users",
+                "description": "Brings a list of all users",
+                "responses":{
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "user_name": {
+                                            "type": "string"
+                                        },
+                                        "email": {
+                                            "type": "string"
+                                        },
+                                        "password": {
+                                            "type": "string"
+                                        },
+                                        "is_admin": {
+                                            "type": "boolean"
+                                        },
+                                        "is_active": {
+                                            "type": "boolean"
+                                        },
+                                        "created_at": {
+                                            "type": "string"
+                                        },
+                                        "updated_at": {
+                                            "type": "string"
+                                        }                                 
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

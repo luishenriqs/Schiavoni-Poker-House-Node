@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  database_schiavoni: 
+    image: postgres
+    container_name: db_schiavoni
+    restart: always
+    ports: 
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=schiavoni
+    volumes:
+      - pgdata:/data/postgres
+
+  app:
+    build: .
+    container_name: schiavoni
+    restart: always
+    ports: 
+      - 3333:3333
+      - 9229:9229
+    volumes: 
+      - .:/usr/app
+    links: 
+      - database_schiavoni
+    depends_on:
+      - database_schiavoni
+
+volumes:
+  pgdata:
+    driver: local
