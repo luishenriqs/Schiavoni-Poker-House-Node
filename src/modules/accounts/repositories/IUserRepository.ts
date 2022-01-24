@@ -12,6 +12,8 @@ interface IUserRepository {
 
     list(): Promise<User[]>;
 
+    listOnlyActive(): Promise<User[]>;
+
     findById(id: number): Promise<User | void>;
 
     findByName(name: string): Promise<User | void>;

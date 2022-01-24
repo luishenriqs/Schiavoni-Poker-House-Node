@@ -1,5 +1,6 @@
 import "reflect-metadata"
 import { inject, injectable } from 'tsyringe';
+import { instanceToInstance } from 'class-transformer';
 import { User } from "../../entities/User";
 import { IUserRepository } from "../../repositories/IUserRepository";
 
@@ -11,7 +12,7 @@ class FindByNameUseCase {
     ) {};
     async execute({ name }): Promise<User | void> {
         let user = await this.userRepository.findByName(name);
-        return user;
+        return instanceToInstance(user);
     }
 };
 

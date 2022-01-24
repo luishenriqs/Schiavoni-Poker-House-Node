@@ -5,15 +5,15 @@ import { User } from "../../entities/User";
 import { IUserRepository } from "../../repositories/IUserRepository";
 
 @injectable()
-class FindByIdUseCase {
+class ListOnlyActiveUseCase {
     constructor(
         @inject("UserRepository")
         private userRepository: IUserRepository,
     ) {};
-    async execute({ id }): Promise<User | void> {
-        let user = await this.userRepository.findById(id);
-        return instanceToInstance(user);
+    async execute(): Promise<User[]> {
+        let onlyActive = await this.userRepository.listOnlyActive();
+        return instanceToInstance(onlyActive);
     }
 };
 
-export { FindByIdUseCase };
+export { ListOnlyActiveUseCase };

@@ -29,27 +29,38 @@ class UserRepository implements IUserRepository {
 
         await this.repository.save(user);
         return user;
-    }
+    };
 
     async list(): Promise<User[]> {
         const user = await this.repository.find();
         return user;
-    }
+    };
+
+    async listOnlyActive(): Promise<User[]> {
+        const user = await this.repository.find(
+            {
+                where: {
+                    is_active: true
+                },
+            }
+        );
+        return user;
+    };
 
     async findById(id: number): Promise<User | void> {
         const user = await this.repository.findOne( id );
         return user;
-    }
+    };
 
     async findByName(name: string): Promise<User | void> {
         const user = await this.repository.findOne({ name });
         return user;
-    }
+    };
 
     async findByEmail(email: string): Promise<User | void> {
         const user = await this.repository.findOne({ email });
         return user;
-    }
+    };
 };
 
 export { UserRepository };

@@ -12,24 +12,20 @@ class CreateGameUseCase {
     ) {};
 
         async execute({
-            id,
             game_number,
             classification,
             user_id,
             user_name,
             points,
-        }: IGamesDTO): Promise<Game | void> {
+        }: IGamesDTO): Promise<void> {
 
-        const game = await this.gamesRepository.create({
-            id,
+        await this.gamesRepository.create({
             game_number,
             classification,
             user_id,
             user_name,
             points,
-        })
-
-        return game;
+        });
     };
 };
 

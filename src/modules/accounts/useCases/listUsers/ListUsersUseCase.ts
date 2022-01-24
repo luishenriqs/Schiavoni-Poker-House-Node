@@ -1,5 +1,6 @@
 import "reflect-metadata"
 import { inject, injectable } from 'tsyringe';
+import { instanceToInstance } from 'class-transformer';
 import { User } from "../../entities/User";
 import { IUserRepository } from "../../repositories/IUserRepository";
 
@@ -11,7 +12,7 @@ class ListUsersUseCase {
     ) {};
     async execute(): Promise<User[]> {
         let users = await this.userRepository.list();
-        return users;
+        return instanceToInstance(users);
     }
 };
 

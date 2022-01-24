@@ -10,7 +10,7 @@ import { Exclude } from 'class-transformer';
 @Entity("users")
 class User {
     @PrimaryGeneratedColumn()
-    id: number;
+    id?: number;
 
     @Column()
     name: string;
