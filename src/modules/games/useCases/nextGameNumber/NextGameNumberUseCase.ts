@@ -9,7 +9,7 @@ class NextGameNumberUseCase {
         private gamesRepository: IGamesRepository,
     ) {};
     async execute(): Promise<number> {
-        let nextGameNumber = await this.gamesRepository.nextGameNumber();
+        const nextGameNumber = await this.gamesRepository.nextGameNumber();
         return nextGameNumber;
     }
 };

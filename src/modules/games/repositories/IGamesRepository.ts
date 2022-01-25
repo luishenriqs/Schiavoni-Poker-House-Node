@@ -6,17 +6,14 @@ interface IGamesRepository {
         game_number,
         classification,
         user_id,
-        user_name,
         points,
-    }: IGamesDTO): Promise<void>;
+    }: IGamesDTO): Promise<Game | void>;
 
     nextGameNumber(): Promise<number>;
 
     list(): Promise<Game[]>;
 
     findByGameNumber(game_number: number): Promise<Game[]>;
-
-    findByName(user_name: string): Promise<Game[]>;
 
     findById(user_id: number): Promise<Game[]>;
 

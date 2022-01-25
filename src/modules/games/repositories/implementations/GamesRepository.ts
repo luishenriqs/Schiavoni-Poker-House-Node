@@ -16,23 +16,28 @@ class GamesRepository implements IGamesRepository {
         game_number,
         classification,
         user_id,
-        user_name,
         points,
-    }: IGamesDTO): Promise<void> {
+    }: IGamesDTO): Promise<Game | void> {
 
         const game = this.repository.create({
             game_number,
             classification,
             user_id,
-            user_name,
             points,
         });
-
+        if (!game) {
+            throw new AppError('There was an error, please try again later');
+        };
         await this.repository.save(game);
+        return game;
     };
 
     async nextGameNumber(): Promise<number> {
         const games = await this.repository.find();
+        if (games.length === 0) {
+            const next_game = 1;
+            return next_game;
+        };
         const numbers = games.map(game => {
             return game.game_number;
         });
@@ -43,6 +48,9 @@ class GamesRepository implements IGamesRepository {
 
     async list(): Promise<Game[]> {
         const games = await this.repository.find();
+        if (!games) {
+            throw new AppError('There are no matches registered');
+        };
         return games;
     };
 
@@ -51,13 +59,13 @@ class GamesRepository implements IGamesRepository {
         return games;
     };
 
-    async findByName(user_name: string): Promise<Game[]> {
-        const games = await this.repository.find({ user_name });
-        return games;
-    };
-
     async findById(user_id: number): Promise<Game[]> {
-        const games = await this.repository.find({ user_id });
+        const games = await this.repository.find({
+            where: {
+                user_id
+            },
+            relations: ["userId"],
+        });
         return games;
     };
 
@@ -65,8 +73,7 @@ class GamesRepository implements IGamesRepository {
         const games = await this.repository.find({ game_number });
         if (!games) {
             throw new AppError('This game does not exist');
-        }
-
+        };
         games.map(async game => {
             await this.repository.remove(game);
         });
@@ -75,11 +82,3 @@ class GamesRepository implements IGamesRepository {
 };
 
 export { GamesRepository };
-
-/* 
-******************** PRÓXIMAS TASKS **************************
-
-1 - MÉTODO DELETE FUNCIONA PORÉM REQUISIÇÃO NO INSOMNIA NÃO FINALIZA;
-2 - IMPLEMENTAR MÉTODOS PUT E PATCH NOS DOIS MÓDULOS DA APLICAÇÃO;
-3 - VERIFICAR MÉTODO AUTHENTICATE;
-*/

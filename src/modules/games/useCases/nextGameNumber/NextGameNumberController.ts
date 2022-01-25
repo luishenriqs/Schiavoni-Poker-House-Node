@@ -5,8 +5,8 @@ import { NextGameNumberUseCase } from './NextGameNumberUseCase';
 class NextGameNumberController {
     async handle(request: Request, response: Response): Promise<Response> {
         const nextGameNumberUseCase = container.resolve(NextGameNumberUseCase);
-        const game_numbers = await nextGameNumberUseCase.execute();
-        return response.json(game_numbers);
+        const nextGameNumber = await nextGameNumberUseCase.execute();
+        return response.json(nextGameNumber);
     };
 };
 

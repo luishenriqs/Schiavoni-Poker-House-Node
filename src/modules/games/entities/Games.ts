@@ -27,9 +27,6 @@ class Game {
     userId: User;
 
     @Column()
-    user_name: string;
-
-    @Column()
     points: number;
 
     @CreateDateColumn({ name: 'created_at' })

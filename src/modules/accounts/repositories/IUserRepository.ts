@@ -19,6 +19,10 @@ interface IUserRepository {
     findByName(name: string): Promise<User | void>;
 
     findByEmail(email: string): Promise<User | void>;
+
+    delete(id: number): Promise<void>;
+
+    update(id: number, is_admin: boolean, is_active: boolean): Promise<User>;
 };
 
 export { IUserRepository };

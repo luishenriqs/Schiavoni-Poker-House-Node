@@ -7,7 +7,7 @@ class DeleteGamesController {
         const { game_number } = request.body;
         const deleteGamesUseCase = container.resolve(DeleteGamesUseCase);
         await deleteGamesUseCase.execute({ game_number });
-        return;
+        return response.status(200).send();
     };
 };
 
