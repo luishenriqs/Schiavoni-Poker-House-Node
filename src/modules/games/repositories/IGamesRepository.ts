@@ -17,6 +17,10 @@ interface IGamesRepository {
 
     findById(user_id: number): Promise<Game[]>;
 
+    findClassification(games: Game[]): Promise<string[]>;
+
+    findPoints(games: Game[]): Promise<number[]>;
+
     delete(game_number: number): Promise<void>;
 };
 

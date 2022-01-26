@@ -69,6 +69,25 @@ class GamesRepository implements IGamesRepository {
         return games;
     };
 
+    async findClassification(games: Game[]): Promise<string[]> {
+
+        const classifications = games.map(game => {
+            return game.classification
+        });
+
+        return classifications;
+    };
+
+    async findPoints(games: Game[]): Promise<number[]> {
+
+        const points = games.map(game => {
+            return game.points
+        });
+
+        return points;
+    };
+
+
     async delete(game_number: number): Promise<void> {
         const games = await this.repository.find({ game_number });
         if (!games) {
