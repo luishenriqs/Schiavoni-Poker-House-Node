@@ -36,9 +36,9 @@ class UserStatsUseCase {
         const allClassification = await this.gamesRepository.findClassification(allGames);
         
         //*** Quantidade de vezes em primeiro, segundo e terceiro lugares */
-        const allFirst = allClassification.filter(() => "first");
-        const allSecond = allClassification.filter(() => "second");
-        const allThird = allClassification.filter(() => "third");
+        const allFirst = allClassification.filter(value => value === "first");
+        const allSecond = allClassification.filter(value => value === "second");
+        const allThird = allClassification.filter(value => value === "third");
 
         //*** Pontos de todos os jogos disputados */
         const allPoints = await this.gamesRepository.findPoints(allGames);
@@ -55,9 +55,9 @@ class UserStatsUseCase {
         const eightClassification = await this.gamesRepository.findClassification(eightGames);
 
         //*** Quantidade de vezes em primeiro, segundo e terceiro lugares */
-        const eightFirst = eightClassification.filter(() => "first");
-        const eightSecond = eightClassification.filter(() => "second");
-        const eightThird = eightClassification.filter(() => "third");
+        const eightFirst = eightClassification.filter(value => value === "first");
+        const eightSecond = eightClassification.filter(value => value === "second");
+        const eightThird = eightClassification.filter(value => value === "third");
 
         //*** Pontos dos últimos 8 jogos */
         const points = await this.gamesRepository.findPoints(eightGames);
